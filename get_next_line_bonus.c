@@ -20,19 +20,19 @@ char	*get_next_line(int fd)
 	int			r;
 
 	r = 1;
-	ptr = calloc(1, 1);
-	if (con[fd])
+	ptr = 0;
+	if (con[fd] != NULL)
 		ptr = ft_strjoin(con[fd], ptr);
-	while (r)
+	while (r > 0)
 	{
 		r = read(fd, buf, BUFFER_SIZE);
-		if (r < 0)
-			return (NULL);
+		if (r < 0 || fd == 1 || fd == 2)
+			break ;
 		buf[r] = '\0';
 		ptr = ft_strjoin(ptr, buf);
 		if (new_line(ptr))
 			break ;
 	}
 	con[fd] = get_last_line(ptr);
-	return (get_line(ptr));
+	return (_get_line(ptr));
 }

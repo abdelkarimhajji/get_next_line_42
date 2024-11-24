@@ -17,7 +17,7 @@ int	ft_strlen(const char *s)
 	int	i;
 
 	i = 0;
-	while (s && s[i])
+	while (s != NULL && s[i] != '\0')
 		i++;
 	return (i);
 }
@@ -65,7 +65,7 @@ int	new_line(char *containe)
 	return (0);
 }
 
-char	*get_line(char *s)
+char	*_get_line(char *s)
 {
 	int		count;
 	char	*ptr;
@@ -75,7 +75,7 @@ char	*get_line(char *s)
 	if (s == NULL)
 		return (0);
 	count = 0;
-	while (s[count] && s[count] != '\n')
+	while (s[count] != '\0' && s[count] != '\n')
 		count++;
 	ptr = malloc(count + 2);
 	while (s[i] && s[i] != '\n')
@@ -105,7 +105,7 @@ char	*get_last_line(char *s)
 		return (0);
 	count_2 = 0;
 	count = 0;
-	while (s[count_2] && s[count_2] != '\n')
+	while (s[count_2] != '\0' && s[count_2] != '\n')
 		count_2++;
 	if (s[count_2] == '\n')
 		count_2++;
@@ -114,7 +114,7 @@ char	*get_last_line(char *s)
 	if ((count - count_2) <= 0)
 		return (0);
 	ptr = malloc((count - count_2) + 1);
-	while (s[count_2])
+	while (s[count_2] != '\0')
 		ptr[i++] = s[count_2++];
 	ptr[i] = '\0';
 	return (ptr);
